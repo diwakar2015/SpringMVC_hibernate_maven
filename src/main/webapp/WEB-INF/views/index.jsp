@@ -69,7 +69,7 @@
 
 </form>
 
-
+<center><p>Not registered?<a href="${pageContext.request.contextPath}/adduser">Register here.</a>  </p></center>
 </br>
 	<%
 			Boolean status = (Boolean) request.getAttribute("status");
