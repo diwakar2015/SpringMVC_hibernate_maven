@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.diwakar.springexample.model.User" %>
 <%@ page session="false" %>
 
 <!DOCTYPE html>
@@ -33,6 +34,29 @@
 
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
+<%
+//Check for session
+User user= null;
+		String userName="";
+HttpSession session = request.getSession();
+if(session!=null)
+{
+	if(session.getAttribute("userInfo")==null)
+	{
+		response.sendRedirect("indexpage");
+	}
+	else
+	{
+		 user = (User)session.getAttribute("userInfo");
+		 userName = user.getUserName();
+	}
+}
+
+
+%>
+
+
 <nav class="navbar navbar-default">
   <div class="container-fluid" style="height: 60px"> 
     <div class="navbar-header">
@@ -81,7 +105,8 @@
       
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Logout</a></li>
+        <li>Welcome! <%=userName %></li>
+        <li><a href="${contextPath}/logout">Logout</a></li>
         
       </ul>
     </div><!-- /.navbar-collapse -->
